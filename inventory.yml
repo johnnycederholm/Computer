@@ -1,0 +1,11 @@
+home:
+  hosts:
+    workstation:
+      ansible_connection: local
+      ansible_host: localhost
+      #ansible_python_interpreter: /home/ansible/ansible-env/bin/python
+
+    laptop:
+      ansible_connection: local
+      ansible_host: localhost
+      #ansible_python_interpreter: /home/ansible/ansible-env/bin/python

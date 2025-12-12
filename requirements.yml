@@ -1,0 +1,28 @@
+roles:
+  - name: spotify
+    src: git+https://github.com/johnnycederholm/ansible-role-spotify.git
+    version: main
+  - name: docker-engine
+    src: git+git@github.com:johnnycederholm/ansible-role-docker-engine.git
+    version: main
+  - name: drawio
+    src: git+git@github.com:johnnycederholm/ansible-role-drawio.git
+    version: main
+  - name: google-chrome
+    src: git+git@github.com:johnnycederholm/ansible-role-google-chrome.git
+    version: main
+  - name: dotnet-sdk
+    src: git+git@github.com:johnnycederholm/ansible-role-dotnet-sdk.git
+    version: main
+  - name: bash-ohmyposh
+    src: git+git@github.com:johnnycederholm/ansible-role-bash-ohmyposh.git
+    version: main
+  - name: nerd-fonts
+    src: git+git@github.com:johnnycederholm/ansible-role-nerd-fonts.git
+    version: main
+  - name: plymouth
+    src: git+git@github.com:johnnycederholm/ansible-role-plymouth.git
+    version: main
+  - name: profile-picture
+    src: git+git@github.com:johnnycederholm/ansible-role-profile-picture.git
+    version: main

@@ -1,0 +1,34 @@
+- name: System configuration
+  hosts: home
+  become: true
+  roles:
+    - name: Install Plymouth and theme
+      role: plymouth
+      vars:
+        theme_name: debian-mac-style
+        theme_src: "{{ playbook_dir }}/assets/themes/plymouth/{{ theme_name }}.zip"
+
+    - name: Configure user profile picture
+      role: profile-picture
+      vars:
+        picture_src: "{{ playbook_dir }}/assets/pictures/profile.jpg"
+
+- name: Install applications
+  hosts: home
+  become: true
+  roles:
+    - name: Install Spotify
+      role: spotify
+    - docker-engine
+    - drawio
+    - google-chrome
+    - name: "Install .NET 9"
+      role: dotnet-sdk
+      vars:
+        version: 9.0.306
+    - bash-ohmyposh
+    - name: Install Nerd Fonts
+      role: nerd-fonts
+      vars:
+        fonts:
+          - JetBrainsMono

@@ -1,0 +1,22 @@
+- name: Prepare Python venv
+  hosts: all
+  become: true
+  tasks:
+    - name: Ensure python3-venv package exists
+      ansible.builtin.apt:
+        name: python3-venv
+        state: present
+
+    - name: Create venv if missing
+      ansible.builtin.command: python3 -m venv /opt/ansible-venv
+      args:
+        creates: /opt/ansible-venv/bin/activate
+
+    - name: Copy Python requirements file
+      ansible.builtin.copy:
+        src: "requirements.txt"
+        dest: "/opt/ansible-venv/requirements.txt"
+        mode: "0644"
+
+    - name: Install requirements into venv
+      ansible.builtin.command: /opt/ansible-venv/bin/pip install -r /opt/ansible-venv/requirements.txt

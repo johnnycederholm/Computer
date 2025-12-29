@@ -26,3 +26,15 @@ roles:
   - name: profile-picture
     src: git+git@github.com:johnnycederholm/ansible-role-profile-picture.git
     version: main
+  - name: vs-code
+    src: git+git@github.com:johnnycederholm/ansible-role-vs-code.git
+    version: main
+  - name: powershell
+    src: git+git@github.com:johnnycederholm/ansible-role-powershell.git
+    version: main
+  - name: dotfiles
+    src: git+git@github.com:johnnycederholm/ansible-role-dotfiles.git
+    version: main
+  - name: gnome-settings
+    src: git+git@github.com:johnnycederholm/ansible-role-gnome-settings.git
+    version: main

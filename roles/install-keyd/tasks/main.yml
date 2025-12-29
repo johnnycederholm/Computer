@@ -1,0 +1,25 @@
+- name: "Install keyd packages"
+  ansible.builtin.apt:
+    update_cache: true
+    state: present
+    name:
+      - keyd
+      - keyd-application-mapper
+
+- name: Copy keyd configuration
+  ansible.builtin.copy:
+    src: "{{ keyd_config_src }}"
+    dest: "{{ keyd_config_dest }}"
+    remote_src: false
+
+- name: Enable keyd service
+  ansible.builtin.systemd:
+    name: keyd
+    enabled: true
+    daemon_reload: true
+
+- name: Reload keyd
+  ansible.builtin.shell: |
+    sudo keyd.rvaiya reload
+  args:
+    executable: /bin/bash

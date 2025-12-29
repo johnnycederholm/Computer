@@ -1,0 +1,14 @@
+- name: Copy desktop background
+  ansible.builtin.copy:
+    src: "{{ desktop_background_src }}"
+    dest: "{{ desktop_background_dest }}"
+
+- name: Set desktop background
+  community.general.dconf:
+    key: "/org/gnome/desktop/background/picture-uri"
+    value: "'file:///home/{{ ansible_user }}/Pictures/{{ desktop_background_name }}'"
+
+- name: Set desktop background scaling option
+  community.general.dconf:
+    key: "/org/gnome/desktop/background/picture-options"
+    value: "'zoom'"

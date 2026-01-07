@@ -1,4 +1,4 @@
 - name: Install Gnome applications
   ansible.builtin.apt:
-    name: "{{ apps }}"
+    name: "{{ gnome_apps }}"
     state: present

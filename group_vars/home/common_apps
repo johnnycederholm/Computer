@@ -1,0 +1,18 @@
+common_packages:
+  - wget
+  - jq
+  - yq
+  - curl
+  - gpg
+  - shellcheck
+  - meld
+  - obfuscate
+  - virt-manager
+  - gnome-boxes
+
+disabled_services:
+  - cups
+  - cups-browsed
+
+uninstall_packages:
+  - firefox-esr

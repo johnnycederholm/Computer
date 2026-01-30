@@ -38,3 +38,6 @@ roles:
   - name: gnome-settings
     src: git+git@github.com:johnnycederholm/ansible-role-gnome-settings.git
     version: main
+  - name: obsidian
+    src: git+git@github.com:johnnycederholm/ansible-role-obsidian.git
+    version: main

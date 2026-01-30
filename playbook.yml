@@ -1,7 +1,5 @@
-# Fungerar det att köra playbook flera gånger? Vad händer om man kör apt update?
 # Inställningar för terminalen
 # Flytta konfiguration för extensions till extern conf?
-# Använd Gnomes standard-tema
 
 - name: Base configuration
   hosts: home
@@ -77,10 +75,14 @@
       become: true
       vars:
         powershell_version: 7.6.0-preview.6
+    - name: Install Obsidian
+      role: obsidian
 
 - name: Setup Gnome
   hosts: home
   roles:
+    - name: Disable welcome screen
+      role: gnome-disable-welcome-screen
     - name: Install useful Gnome apps
       role: gnome-apps
       become: true
@@ -117,10 +119,7 @@
           - { name: /org/gnome/desktop/input-sources/sources, value: "[('xkb', 'us'), ('xkb', 'se')]" }
           - { name: /org/gnome/desktop/input-sources/per-window, value: true }
           - { name: /org/gnome/desktop/interface/icon-theme, value: "'ZorinBlue-Light'" }
-          - { name: /org/gnome/shell/extensions/just-perfection/quick-settings-dark-mode, value: false }
-          - { name: /org/gnome/shell/extensions/just-perfection/quick-settings-night-light, value: false }
-          - { name: /org/gnome/shell/extensions/just-perfection/world-clock, value: false }
-          - { name: /org/gnome/shell/extensions/just-perfection/weather, value: false }
+          - { name: /org/gnome/shell/favorite-apps, value: ['code.desktop', 'obsidian.desktop', 'drawio.desktop', 'spotify.desktop', 'google-chrome.desktop'] }
 
     - name: Apply settings for Gnome Terminal
       role: gnome-settings
@@ -177,6 +176,10 @@
         gnome_extension_settings:
           - { name: /org/gnome/shell/extensions/just-perfection/support-notifier-type, value: 0 }
           - { name: /org/gnome/shell/extensions/just-perfection/workspace-popup, value: false }
+          - { name: /org/gnome/shell/extensions/just-perfection/quick-settings-dark-mode, value: false }
+          - { name: /org/gnome/shell/extensions/just-perfection/quick-settings-night-light, value: false }
+          - { name: /org/gnome/shell/extensions/just-perfection/world-clock, value: false }
+          - { name: /org/gnome/shell/extensions/just-perfection/weather, value: false }
 
     - name: Install App indicator extension
       role: gnome-extension
@@ -252,6 +255,7 @@
     - name: Uninstall unused packages
       ansible.builtin.apt:
         name: "{{ uninstall_packages }}"
+        state: absent
       become: true
 
     - name: Remove all unused packages

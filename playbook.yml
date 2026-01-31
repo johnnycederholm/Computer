@@ -1,6 +1,3 @@
-# Inställningar för terminalen
-# Flytta konfiguration för extensions till extern conf?
-
 - name: Base configuration
   hosts: home
   roles:
@@ -41,7 +38,7 @@
         keyd_config_dest: "/etc/keyd/default.conf"
 
   tasks:
-    - name: "Install {{ common_packages }}"
+    - name: "Install common packages"
       become: true
       ansible.builtin.apt:
         update_cache: true
@@ -102,7 +99,6 @@
       role: gnome-settings
       vars:
         gnome_settings:
-          - { name: /org/gnome/software/first-run, value: false }
           - { name: /org/gnome/mutter/dynamic-workspaces, value: false }
           - { name: /org/gnome/desktop/wm/preferences/num-workspaces, value: 4 }
           - { name: /org/gnome/settings-daemon/plugins/media-keys/shutdown, value: ['<Control><Alt>Delete'] }
@@ -119,7 +115,7 @@
           - { name: /org/gnome/desktop/input-sources/sources, value: "[('xkb', 'us'), ('xkb', 'se')]" }
           - { name: /org/gnome/desktop/input-sources/per-window, value: true }
           - { name: /org/gnome/desktop/interface/icon-theme, value: "'ZorinBlue-Light'" }
-          - { name: /org/gnome/shell/favorite-apps, value: ['code.desktop', 'obsidian.desktop', 'drawio.desktop', 'spotify.desktop', 'google-chrome.desktop'] }
+          - { name: /org/gnome/shell/favorite-apps, value: ['google-chrome.desktop', 'code.desktop', 'spotify.desktop', 'obsidian.desktop', 'drawio.desktop'] }
 
     - name: Apply settings for Gnome Terminal
       role: gnome-settings
@@ -152,9 +148,9 @@
       vars:
         gnome_extension_id: blur-my-shell@aunetx
         gnome_extension_name: gnome-shell-extension-blur-my-shell
-        gnome_extension_settings:
-          - { name: /org/gnome/shell/extensions/blur-my-shell/panel/force-light-text, value: true }
-          - { name: /org/gnome/shell/extensions/blur-my-shell/dash-to-dock/blur, value: false }
+        # gnome_extension_settings:
+        #   - { name: /org/gnome/shell/extensions/blur-my-shell/panel/force-light-text, value: true }
+        #   - { name: /org/gnome/shell/extensions/blur-my-shell/dash-to-dock/blur, value: false }
 
     - name: Install User theme extension
       role: gnome-extension

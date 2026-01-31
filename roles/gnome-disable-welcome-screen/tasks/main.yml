@@ -1,3 +1,14 @@
-- name: Disable welcome screen
-  ansible.builtin.command:
-    cmd: touch ~/.config/gnome-initial-setup-done
+- name: Get Gnome version
+  ansible.builtin.shell:
+    cmd: "gnome-shell --version | cut -d' ' -f3"
+  register: gnome_version
+
+- name: Set welcome-dialog-last-shown-version
+  community.general.dconf:
+    key: "/org/gnome/shell/welcome-dialog-last-shown-version"
+    value: "'{{ gnome_version.stdout }}'"
+
+- name: Set first-run to false
+  community.general.dconf:
+    key: "/org/gnome/software/first-run"
+    value: "'false'"

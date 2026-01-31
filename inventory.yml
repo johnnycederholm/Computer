@@ -11,5 +11,5 @@ home:
       #ansible_python_interpreter: /home/ansible/ansible-env/bin/python
 
     vm:
-      ansible_host: 192.168.122.211
+      ansible_host: 192.168.122.75
       #ansible_python_interpreter: /opt/ansible-venv/bin/python

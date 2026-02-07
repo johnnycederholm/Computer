@@ -1,0 +1,46 @@
+#SPDX-License-Identifier: MIT-0
+---
+- name: Download package
+  ansible.builtin.include_role:
+    name: download-package
+  vars:
+    download_package_user: Ulauncher
+    download_package_repo: Ulauncher
+    download_package_name: "ulauncher_{{ release.tag }}_all.deb"
+
+- name: Install ulauncher
+  ansible.builtin.apt:
+    deb: "{{ downloaded_package.dest }}"
+    state: present
+  become: true
+
+- name: Read existing custom keybindings
+  community.general.dconf:
+    key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings
+    state: read
+  register: ulauncher_custom_keybindings
+
+- name: Merge Ulauncher keybinding
+  ansible.builtin.set_fact:
+    ulauncher_merged_keybindings: >-
+      {{
+        (ulauncher_custom_keybindings.value | default([], true))
+        | union([
+            '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/ulauncher/'
+          ])
+      }}
+
+- name: Write updated custom keybindings
+  community.general.dconf:
+    key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings
+    value: "{{ ulauncher_merged_keybindings }}"
+
+
+- name: Configure shortcut
+  ansible.builtin.include_role:
+    name: gnome-settings
+  vars:
+    gnome_settings:
+      - { name: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/ulauncher/name, value: "'Ulauncher'" }
+      - { name: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/ulauncher/command, value: "'ulauncher-toggle'" }
+      - { name: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/ulauncher/binding, value: "'<Super>F12'" }

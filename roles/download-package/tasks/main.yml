@@ -1,0 +1,13 @@
+- name: Get latest release of a public repository
+  community.general.github_release:
+    user: "{{ download_package_user }}"
+    repo: "{{ download_package_repo }}"
+    action: latest_release
+  register: release
+
+- name: Download package
+  ansible.builtin.get_url:
+    url: https://github.com/{{ download_package_user }}/{{ download_package_repo }}/releases/download/{{ release.tag }}/{{ download_package_name }}
+    dest: /tmp
+    mode: "644"
+  register: downloaded_package

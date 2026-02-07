@@ -116,7 +116,7 @@
           - { name: /org/gnome/desktop/input-sources/sources, value: "[('xkb', 'us'), ('xkb', 'se')]" }
           - { name: /org/gnome/desktop/input-sources/per-window, value: true }
           - { name: /org/gnome/desktop/interface/icon-theme, value: "'ZorinBlue-Light'" }
-          - { name: /org/gnome/shell/favorite-apps, value: ['google-chrome.desktop', 'code.desktop', 'spotify.desktop', 'obsidian.desktop', 'drawio.desktop'] }
+          - { name: /org/gnome/shell/favorite-apps, value: ['org.gnome.Terminal.desktop', 'google-chrome.desktop', 'code.desktop', 'spotify.desktop', 'obsidian.desktop', 'drawio.desktop'] }
 
     - name: Apply settings for Gnome Terminal
       role: gnome-settings
@@ -181,6 +181,7 @@
     - name: Install App indicator extension
       role: gnome-extension
       vars:
+        gnome_extension_id: ubuntu-appindicators@ubuntu.com
         gnome_extension_name: gnome-shell-extension-appindicator
 
     - name: Install Auto move windows extension
@@ -211,6 +212,7 @@
     - name: Install No annoyance extension
       role: gnome-extension
       vars:
+        gnome_extension_id: noannoyance-fork@vrba.dev
         gnome_extension_name: gnome-shell-extension-no-annoyance
 
     - name: Install Places menu extension
@@ -227,6 +229,17 @@
       role: gnome-extension
       vars:
         gnome_extension_name: gnome-shell-extension-workspace-indicator
+
+    - name: Install System Monitor extension
+      role: gnome-extension
+      vars:
+        gnome_extension_id: system-monitor@gnome-shell-extensions.gcampax.github.com
+        gnome_extension_settings:
+          - { name: /org/gnome/shell/extensions/system-monitor/show-cpu, value: true }
+          - { name: /org/gnome/shell/extensions/system-monitor/show-memory, value: true }
+          - { name: /org/gnome/shell/extensions/system-monitor/show-swap, value: false }
+          - { name: /org/gnome/shell/extensions/system-monitor/show-upload, value: false }
+          - { name: /org/gnome/shell/extensions/system-monitor/show-download, value: false }
 
     - name: Set background
       role: gnome-background

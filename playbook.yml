@@ -143,6 +143,7 @@
           - { name: /org/gnome/shell/extensions/dash-to-dock/transparency-mode, value: "'FIXED'" }
           - { name: /org/gnome/shell/extensions/dash-to-dock/background-opacity, value: 0.0 }
           - { name: /org/gnome/shell/extensions/dash-to-dock/running-indicator-style, value: "'DASHES'" }
+          - { name: /org/gnome/shell/extensions/dash-to-dock/intellihide, value: false }
 
     - name: Install Blur my shell extension
       role: gnome-extension

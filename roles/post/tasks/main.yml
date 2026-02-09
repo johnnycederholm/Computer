@@ -1,0 +1,21 @@
+- name: Disable unused services
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: stopped
+    enabled: false
+  loop: "{{ post_disabled_services }}"
+
+- name: Uninstall unused packages
+  ansible.builtin.apt:
+    name: "{{ post_uninstall_packages }}"
+    state: absent
+
+- name: Remove unused packages
+  ansible.builtin.apt:
+    autoremove: true
+
+- name: Reboot
+  ansible.builtin.reboot:
+  when:
+    - post_reboot is defined
+    - post_reboot | bool

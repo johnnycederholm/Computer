@@ -1,0 +1,6 @@
+- name: "Install common packages"
+  ansible.builtin.apt:
+    state: present
+    name: "{{ common_packages }}"
+  when:
+    - common_packages | length > 0

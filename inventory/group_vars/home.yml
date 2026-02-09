@@ -1,3 +1,6 @@
+# bootstrap_hostname:
+bootstrap_timezone: Europe/Stockholm
+
 common_packages:
   - wget
   - jq
@@ -10,12 +13,19 @@ common_packages:
   - virt-manager
   - gnome-boxes
 
-disabled_services:
+post_disabled_services:
   - cups
   - cups-browsed
 
-uninstall_packages:
+post_uninstall_packages:
   - firefox-esr
+
+dotfiles_repo: https://github.com/johnnycederholm/dotfiles.git
+dotfiles_dest: "/home/{{ ansible_user }}/.dotfiles"
+
+nerd_fonts_directory: "/home/{{ ansible_user }}/.local/share/fonts"
+nerd_fonts:
+  - JetBrainsMono
 
 gnome_enabled: true
 gnome_desktop_background_name: "BSonoma_Mac.png"
@@ -122,3 +132,26 @@ gnome_extensions:
   - name: gnome-shell-extension-places-menu
   - name: gnome-shell-extension-windows-navigator
   - name: gnome-shell-extension-workspace-indicator
+
+keyd_config_src: "/home/{{ ansible_user }}/.dotfiles/.config/keyd/keyd.conf"
+keyd_config_dest: "/etc/keyd/default.conf"
+
+picture_src: "{{ playbook_dir }}/assets/pictures/profile.jpg"
+
+plymouth_theme_name: debian-mac-style
+plymouth_theme_src: "{{ playbook_dir }}/assets/themes/plymouth/{{ plymouth_theme_name }}.zip"
+
+powershell_version: 7.6.0-preview.6
+ulauncher_gnome_integration: true
+version: 10.0
+
+tools:
+  # spotify: true
+  # docker: true
+  # drawio: true
+  # chrome: true
+  # dotnet: true
+  # vscode: true
+  # powershell: true
+  # obsidian: true
+  ulauncher: true

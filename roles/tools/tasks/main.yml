@@ -1,0 +1,62 @@
+- name: Install Spotify
+  ansible.builtin.include_role:
+    name: spotify
+  when:
+    - tools.spotify is defined
+    - tools.spotify | bool
+
+- name: Install Docker engine
+  ansible.builtin.include_role:
+    name: docker-engine
+  when:
+    - tools.docker is defined
+    - tools.docker | bool
+
+- name: Install Draw.io Desktop
+  ansible.builtin.include_role:
+    name: drawio
+  when:
+    - tools.drawio is defined
+    - tools.drawio | bool
+
+- name: Install Google Chrome
+  ansible.builtin.include_role:
+    name: google-chrome
+  when:
+    - tools.chrome is defined
+    - tools.chrome | bool
+
+- name: "Install .NET 10 SDK"
+  ansible.builtin.include_role:
+    name: dotnet-sdk
+  when:
+    - tools.dotnet is defined
+    - tools.dotnet | bool
+
+- name: Install VS Code
+  ansible.builtin.include_role:
+    name: vs-code
+  when:
+    - tools.vscode is defined
+    - tools.vscode | bool
+
+- name: Install Powershell
+  ansible.builtin.include_role:
+    name: powershell
+  when:
+    - tools.powershell is defined
+    - tools.powershell | bool
+
+- name: Install Obsidian
+  ansible.builtin.include_role:
+    name: obsidian
+  when:
+    - tools.obsidian is defined
+    - tools.obsidian | bool
+
+- name: Install Ulauncher
+  ansible.builtin.include_role:
+    name: ulauncher
+  when:
+    - tools.ulauncher is defined
+    - tools.ulauncher | bool

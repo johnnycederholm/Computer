@@ -1,0 +1,41 @@
+- name: Read existing custom keybindings
+  community.general.dconf:
+    key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings
+    state: read
+  register: ulauncher_custom_keybindings
+  become: false
+
+- name: Merge Ulauncher keybinding
+  ansible.builtin.set_fact:
+    ulauncher_merged_keybindings: >-
+      {{
+        (ulauncher_custom_keybindings.value | default([], true))
+        | union([
+            '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/ulauncher/'
+          ])
+      }}
+  become: false
+
+- name: Write updated custom keybindings
+  community.general.dconf:
+    key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings
+    value: "{{ ulauncher_merged_keybindings }}"
+  become: false
+
+- name: "Create custom shortcut (name)"
+  community.general.dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/ulauncher/name"
+    value: "'Ulauncher'"
+  become: false
+
+- name: "Create custom shortcut (command)"
+  community.general.dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/ulauncher/command"
+    value: "'ulauncher-toggle'"
+  become: false
+
+- name: "Create custom shortcut (key binding)"
+  community.general.dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/ulauncher/binding"
+    value: "'<Super>F12'"
+  become: false

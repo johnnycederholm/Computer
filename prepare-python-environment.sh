@@ -5,6 +5,5 @@ ansible-playbook \
     --user ${ANSIBLE_USER} \
     --ask-pass \
     --ask-become-pass \
-    --inventory inventory.yml \
     --limit vm \
     python-environment.yml

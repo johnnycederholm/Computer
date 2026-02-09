@@ -1,13 +1,15 @@
-- name: Install Gnome extensions
+- name: Install Gnome extension
   ansible.builtin.apt:
-    name: "{{ gnome_extension_name }}"
+    name: "{{ extension.name }}"
     state: present
   become: true
-  when: gnome_extension_name != ''
+  when:
+    - extension.name is defined
+    - extension.name != ''
 
 # Steps required to make the installed extension
 # visible without logout/login
-- name: Find existing Gnome shell
+- name: Find Gnome shell process
   ansible.builtin.command: 
     cmd: "pgrep -u {{ ansible_facts['user_id'] }} -f gnome-shell"
   register: gnome_shell
@@ -22,11 +24,14 @@
 
 - name: Enable extension
   ansible.builtin.command:
-    cmd: "gnome-extensions enable {{ gnome_extension_id }}"
-  when: gnome_extension_id != ""
+    cmd: "gnome-extensions enable {{ extension.id }}"
+  when: 
+    - extension.id is defined
+    - extension.id != ""
 
-- name: Apply extension settings
+- name: Apply extension configuration
   community.general.dconf:
     key: "{{ item.name }}"
     value: "{{ item.value }}"
-  loop: "{{ gnome_extension_settings }}"
+  loop: "{{ extension.configuration | default([]) }}"
+  when: extension.configuration | length > 0

@@ -1,4 +1,0 @@
-- name: Install Gnome extensions
-  ansible.builtin.apt:
-    name: "{{ gnome_extensions }}"
-    state: present

@@ -1,0 +1,5 @@
+- name: "Apply configuration for {{ component.name }}"
+  community.general.dconf:
+    key: "{{ item.name }}"
+    value: "{{ item.value }}"
+  loop: "{{ component.configuration }}"

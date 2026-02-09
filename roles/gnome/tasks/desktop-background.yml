@@ -1,19 +1,19 @@
 - name: Check if desktop background already exist
   ansible.builtin.stat:
     path: "{{ gnome_desktop_background_dest }}"
-  register: desktop_background
+  register: gnome_desktop_background
 
 - name: Create parent directories
   ansible.builtin.file:
     path: "{{ gnome_desktop_background_dest | dirname }}"
     state: directory
-  when: not desktop_background.stat.exists
+  when: not gnome_desktop_background.stat.exists
 
 - name: Copy desktop background
   ansible.builtin.copy:
     src: "{{ gnome_desktop_background_src }}"
     dest: "{{ gnome_desktop_background_dest }}"
-  when: not desktop_background.stat.exists
+  when: not gnome_desktop_background.stat.exists
 
 - name: Set desktop background
   community.general.dconf:

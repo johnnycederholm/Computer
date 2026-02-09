@@ -1,0 +1,28 @@
+- name: Skip Gnome role if disabled
+  ansible.builtin.meta: end_role
+  when: not gnome_enabled | bool
+
+- name: Disable welcome screen
+  ansible.builtin.include_tasks: disable-welcome-screen.yml
+
+- name: Install additional Gnome packages
+  ansible.builtin.include_tasks: packages.yml
+
+- name: Set desktop background
+  ansible.builtin.include_tasks: desktop-background.yml
+
+- name: Apply configuration
+  ansible.builtin.include_tasks: configuration.yml
+  loop: "{{ gnome_configuration }}"
+  loop_control:
+    loop_var: component
+  when:
+    - gnome_configuration | length > 0
+
+- name: Install and configure Gnome extensions
+  ansible.builtin.include_tasks: extensions.yml
+  loop: "{{ gnome_extensions }}"
+  loop_control:
+    loop_var: extension
+  when:
+    - gnome_extensions | length > 0

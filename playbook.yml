@@ -4,15 +4,13 @@
       become: true
     - role: plymouth
       become: true
-    - role: common
-      become: true
     - dotfiles
     - role: install-keyd
       become: true
     - nerd-fonts
-    - bash-ohmyposh
     - role: profile-picture
       become: true
+      when: profile_picture_enabled | bool
     - gnome
     - role: tools
       become: true

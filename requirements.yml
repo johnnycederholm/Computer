@@ -14,9 +14,6 @@ roles:
   - name: dotnet-sdk
     src: git+git@github.com:johnnycederholm/ansible-role-dotnet-sdk.git
     version: main
-  - name: bash-ohmyposh
-    src: git+git@github.com:johnnycederholm/ansible-role-bash-ohmyposh.git
-    version: main
   - name: nerd-fonts
     src: git+git@github.com:johnnycederholm/ansible-role-nerd-fonts.git
     version: main

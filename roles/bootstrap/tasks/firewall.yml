@@ -1,0 +1,7 @@
+- name: Install firewall
+  ansible.builtin.apt:
+    name:
+      - firewalld
+      - firewall-applet
+      - firewall-config
+    state: present

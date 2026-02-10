@@ -17,3 +17,18 @@
   community.general.timezone:
     name: "{{ bootstrap_timezone }}"
   when: bootstrap_timezone is defined
+
+- name: "Install common packages"
+  ansible.builtin.apt:
+    state: present
+    name: "{{ bootstrap_packages }}"
+  when:
+    - bootstrap_packages | length > 0
+
+- name: Install firewall
+  ansible.builtin.include_tasks: firewall.yml
+  when: bootstrap_firewall | bool
+
+- name: Install Oh my posh
+  ansible.builtin.include_tasks: ohmyposh.yml
+  when: bootstrap_ohmyposh | bool

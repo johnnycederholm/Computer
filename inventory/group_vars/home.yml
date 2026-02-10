@@ -1,7 +1,7 @@
 # bootstrap_hostname:
 bootstrap_timezone: Europe/Stockholm
 
-common_packages:
+bootstrap_packages:
   - wget
   - jq
   - yq
@@ -124,9 +124,11 @@ gnome_extensions:
   - id: noannoyance-fork@vrba.dev
     name: gnome-shell-extension-no-annoyance
 
+  - id: GPaste@gnome-shell-extensions.gnome.org
+    name: gnome-shell-extension-gpaste
+  
   - name: gnome-shell-extension-auto-move-windows
   - name: gnome-shell-extension-drive-menu
-  - name: gnome-shell-extension-gpaste
   - name: gnome-shell-extension-launch-new-instance
   - name: gnome-shell-extension-manager
   - name: gnome-shell-extension-places-menu
@@ -136,6 +138,7 @@ gnome_extensions:
 keyd_config_src: "/home/{{ ansible_user }}/.dotfiles/.config/keyd/keyd.conf"
 keyd_config_dest: "/etc/keyd/default.conf"
 
+profile_picture_enabled: true
 picture_src: "{{ playbook_dir }}/assets/pictures/profile.jpg"
 
 plymouth_theme_name: debian-mac-style
@@ -143,15 +146,16 @@ plymouth_theme_src: "{{ playbook_dir }}/assets/themes/plymouth/{{ plymouth_theme
 
 powershell_version: 7.6.0-preview.6
 ulauncher_gnome_integration: true
-version: 10.0
+dotnet_versions: 
+  - 10.0
 
 tools:
-  # spotify: true
-  # docker: true
-  # drawio: true
-  # chrome: true
-  # dotnet: true
-  # vscode: true
-  # powershell: true
-  # obsidian: true
+  spotify: true
+  docker: true
+  drawio: true
+  chrome: true
+  dotnet: true
+  vscode: true
+  powershell: true
+  obsidian: true
   ulauncher: true

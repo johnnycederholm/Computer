@@ -1,0 +1,23 @@
+- name: Install curl
+  ansible.builtin.apt:
+    name:
+      - curl
+    state: present
+  become: true
+
+- name: Download Oh My Posh install script
+  ansible.builtin.get_url:
+    url: https://ohmyposh.dev/install.sh
+    dest: /tmp/ohmyposh-install.sh
+    mode: '0755'
+  become: false
+
+- name: Install Oh My Posh
+  ansible.builtin.command:
+    cmd: "bash -c /tmp/ohmyposh-install.sh"
+  become: false
+
+- name: Remove Oh My Posh install script
+  ansible.builtin.command:
+    cmd: "rm /tmp/ohmyposh-install.sh"
+  become: false

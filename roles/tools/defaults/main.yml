@@ -14,4 +14,3 @@ tools_packages:
 
   virtualization:
     - virt-manager
-    - gnome-boxes

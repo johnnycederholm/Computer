@@ -1,0 +1,43 @@
+- name: Install dependencies
+  ansible.builtin.apt:
+    name: unzip
+    state: present
+  become: true
+
+- name: Create fonts directory
+  ansible.builtin.file:
+    path: "{{ base_nerd_fonts_directory }}"
+    state: directory
+    mode: '0755'
+
+- name: Get latest release information
+  community.general.github_release:
+    user: ryanoasis
+    repo: nerd-fonts
+    action: latest_release
+  register: release
+
+- name: Download font package
+  ansible.builtin.get_url:
+    url: https://github.com/ryanoasis/nerd-fonts/releases/download/{{ release.tag }}/{{ item }}.zip
+    dest: /tmp
+    mode: "644"
+  loop: "{{ base_nerd_fonts }}"
+
+- name: Create font directory
+  ansible.builtin.file:
+    path: "{{ base_nerd_fonts_directory }}/{{ item }}"
+    state: directory
+    mode: '0755'
+  loop: "{{ base_nerd_fonts }}"
+
+- name: Extract font archive
+  ansible.builtin.unarchive:
+    src: "/tmp/{{ item }}.zip"
+    dest: "{{ base_nerd_fonts_directory }}/{{ item }}"
+    remote_src: true
+  loop: "{{ base_nerd_fonts }}"
+
+- name: Refresh font cache
+  ansible.builtin.command: fc-cache -f -v
+  when: ansible_facts['os_family'] == "Debian" or ansible_facts['os_family'] == "RedHat"

@@ -1,0 +1,20 @@
+- name: Install Google Chrome
+  ansible.builtin.include_role:
+    name: google-chrome
+
+- name: Install Draw.io Desktop
+  ansible.builtin.include_role:
+    name: drawio
+
+- name: Install Obsidian
+  ansible.builtin.include_role:
+    name: obsidian
+
+- name: Install Ulauncher
+  ansible.builtin.include_role:
+    name: ulauncher
+
+- name: Install productivity packages
+  ansible.builtin.apt:
+    name: "{{ tools_packages.productivity }}"
+    state: present

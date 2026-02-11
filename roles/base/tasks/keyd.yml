@@ -7,8 +7,8 @@
 
 - name: Symlink keyd configuration
   ansible.builtin.file:
-    src: "{{ keyd_config_src }}"
-    dest: "{{ keyd_config_dest }}"
+    src: "{{ base_keyd_config_src }}"
+    dest: "{{ base_keyd_config_dest }}"
     state: link
 
 - name: Enable keyd service

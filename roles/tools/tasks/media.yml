@@ -1,0 +1,8 @@
+- name: Install Spotify
+  ansible.builtin.include_role:
+    name: spotify
+
+- name: Install media packages
+  ansible.builtin.apt:
+    name: "{{ tools_packages.media }}"
+    state: present

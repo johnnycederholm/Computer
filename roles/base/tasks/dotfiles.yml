@@ -1,0 +1,24 @@
+- name: Install prerequisites
+  ansible.builtin.apt:
+    name:
+      - git
+      - stow
+    state: present
+  become: true
+
+- name: Clone dotfiles repository
+  ansible.builtin.git:
+    repo: "{{ base_dotfiles_repo }}"
+    dest: "{{ base_dotfiles_dest }}"
+
+- name: Run stow
+  ansible.builtin.command:
+    cmd: "stow . --adopt --verbose=2"
+    chdir: "{{ base_dotfiles_dest }}"
+
+# Reset dotfiles repository after running stow
+# with --adopt
+- name: Reset dotfiles repository
+  ansible.builtin.command:
+    cmd: "git reset --hard"
+    chdir: "{{ base_dotfiles_dest }}"

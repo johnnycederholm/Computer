@@ -5,21 +5,19 @@
   register: ulauncher_custom_keybindings
   become: false
 
-- name: Merge Ulauncher keybinding
-  ansible.builtin.set_fact:
-    ulauncher_merged_keybindings: >-
-      {{
-        (ulauncher_custom_keybindings.value | default([], true))
-        | union([
-            '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/ulauncher/'
-          ])
-      }}
-  become: false
+- name: Parse list
+  set_fact:
+    current_list: "{{ ulauncher_custom_keybindings.value | from_yaml }}"
 
-- name: Write updated custom keybindings
+- name: Merge Ulauncher keybinding
+  set_fact:
+    merged_list: "{{ ((current_list | default([], true)) + ['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/ulauncher/']) | unique }}"
+
+- name: Update custom keybindings
   community.general.dconf:
-    key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings
-    value: "{{ ulauncher_merged_keybindings }}"
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
+    value: "{{ merged_list | to_json }}"
+    state: present
   become: false
 
 - name: "Create custom shortcut (name)"

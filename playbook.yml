@@ -1,18 +1,8 @@
 - hosts: all
   roles:
-    - role: bootstrap
-      become: true
-    - role: plymouth
-      become: true
-    - dotfiles
-    - role: install-keyd
-      become: true
-    - nerd-fonts
-    - role: profile-picture
-      become: true
-      when: profile_picture_enabled | bool
+    - base
     - gnome
     - role: tools
       become: true
-    - role: post
+    - role: post-install
       become: true

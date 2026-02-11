@@ -1,0 +1,16 @@
+- name: Install Docker engine
+  ansible.builtin.include_role:
+    name: docker-engine
+
+- name: "Install .NET 10 SDK"
+  ansible.builtin.include_role:
+    name: dotnet-sdk
+
+- name: Install VS Code
+  ansible.builtin.include_role:
+    name: vs-code
+
+- name: Install devtools packages
+  ansible.builtin.apt:
+    name: "{{ tools_packages.devtools }}"
+    state: present

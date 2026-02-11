@@ -14,27 +14,15 @@ roles:
   - name: dotnet-sdk
     src: git+git@github.com:johnnycederholm/ansible-role-dotnet-sdk.git
     version: main
-  - name: nerd-fonts
-    src: git+git@github.com:johnnycederholm/ansible-role-nerd-fonts.git
-    version: main
-  - name: plymouth
-    src: git+git@github.com:johnnycederholm/ansible-role-plymouth.git
-    version: main
-  - name: profile-picture
-    src: git+git@github.com:johnnycederholm/ansible-role-profile-picture.git
-    version: main
   - name: vs-code
     src: git+git@github.com:johnnycederholm/ansible-role-vs-code.git
     version: main
   - name: powershell
     src: git+git@github.com:johnnycederholm/ansible-role-powershell.git
     version: main
-  - name: dotfiles
-    src: git+git@github.com:johnnycederholm/ansible-role-dotfiles.git
-    version: main
-  - name: gnome-settings
-    src: git+git@github.com:johnnycederholm/ansible-role-gnome-settings.git
-    version: main
   - name: obsidian
     src: git+git@github.com:johnnycederholm/ansible-role-obsidian.git
+    version: main
+  - name: plymouth
+    src: git+git@github.com:johnnycederholm/ansible-role-plymouth.git
     version: main

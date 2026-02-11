@@ -1,0 +1,36 @@
+- name: Ensure AccountsService is installed
+  ansible.builtin.apt:
+    name: accountsservice
+    state: present
+
+- name: Copy profile picture to AccountsService directory
+  ansible.builtin.copy:
+    src: "{{ base_profile_picture_src }}"
+    dest: "/var/lib/AccountsService/icons/{{ ansible_user }}"
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Ensure user metadata file exists
+  ansible.builtin.file:
+    path: "/var/lib/AccountsService/users/{{ ansible_user }}"
+    state: touch
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Configure user image in AccountsService
+  ansible.builtin.blockinfile:
+    path: "/var/lib/AccountsService/users/{{ ansible_user }}"
+    block: |
+      [User]
+      Icon=/var/lib/AccountsService/icons/{{ ansible_user }}
+    create: true
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Restart AccountsService daemon
+  ansible.builtin.systemd:
+    name: accounts-daemon
+    state: restarted

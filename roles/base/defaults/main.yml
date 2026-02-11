@@ -1,0 +1,9 @@
+base_packages: []
+base_features:
+  bootscreen: true
+  firewall: true
+  fonts: true
+  keyd: true
+  ohmyposh: true
+  powershell: true
+  profile_picture: true

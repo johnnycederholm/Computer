@@ -1,0 +1,69 @@
+- name: Ensure apt is usable
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+  become: true
+
+- name: Ensure sudo is installed
+  ansible.builtin.apt:
+    name: sudo
+    state: present
+  become: true
+
+- name: Set hostname
+  ansible.builtin.hostname:
+    name: "{{ base_hostname }}"
+  become: true
+  when: base_hostname is defined
+
+- name: Set timezone
+  community.general.timezone:
+    name: "{{ base_timezone }}"
+  become: true
+  when: base_timezone is defined
+
+- name: "Install base packages"
+  ansible.builtin.apt:
+    state: present
+    name: "{{ base_packages }}"
+  become: true
+  when:
+    - base_packages | length > 0
+
+- name: Install bootscreen
+  ansible.builtin.import_role:
+    name: plymouth
+  become: true
+  when: base_features.bootscreen | bool
+
+- name: Setup dotfiles
+  ansible.builtin.include_tasks: dotfiles.yml
+
+- name: Install firewall
+  ansible.builtin.import_tasks: firewall.yml
+  become: true
+  when: base_features.firewall | bool
+
+- name: Install keyd
+  ansible.builtin.import_tasks: keyd.yml
+  become: true
+  when: base_features.keyd | bool
+
+- name: Install Nerd fonts
+  ansible.builtin.include_tasks: nerdfonts.yml
+  when: base_features.fonts | bool
+
+- name: Install Oh my posh
+  ansible.builtin.include_tasks: ohmyposh.yml
+  when: base_features.ohmyposh | bool
+
+- name: Install Powershell
+  ansible.builtin.import_role:
+    name: powershell
+  become: true
+  when: base_features.powershell | bool
+
+- name: Setup profile picture
+  ansible.builtin.import_tasks: profilepicture.yml
+  become: true
+  when: base_features.profile_picture | bool

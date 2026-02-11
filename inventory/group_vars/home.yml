@@ -1,31 +1,29 @@
-# bootstrap_hostname:
-bootstrap_timezone: Europe/Stockholm
+# base_hostname:
+base_timezone: Europe/Stockholm
 
-bootstrap_packages:
+base_packages:
   - wget
   - jq
   - yq
   - curl
   - gpg
-  - shellcheck
   - meld
   - obfuscate
-  - virt-manager
-  - gnome-boxes
 
-post_disabled_services:
-  - cups
-  - cups-browsed
+base_dotfiles_repo: https://github.com/johnnycederholm/dotfiles.git
+base_dotfiles_dest: "/home/{{ ansible_user }}/.dotfiles"
 
-post_uninstall_packages:
-  - firefox-esr
-
-dotfiles_repo: https://github.com/johnnycederholm/dotfiles.git
-dotfiles_dest: "/home/{{ ansible_user }}/.dotfiles"
-
-nerd_fonts_directory: "/home/{{ ansible_user }}/.local/share/fonts"
-nerd_fonts:
+base_nerd_fonts_directory: "/home/{{ ansible_user }}/.local/share/fonts"
+base_nerd_fonts:
   - JetBrainsMono
+
+base_keyd_config_src: "/home/{{ ansible_user }}/.dotfiles/.config/keyd/keyd.conf"
+base_keyd_config_dest: "/etc/keyd/default.conf"
+
+base_profile_picture_src: "{{ playbook_dir }}/assets/pictures/profile.jpg"
+
+plymouth_theme_name: debian-mac-style
+plymouth_theme_src: "{{ playbook_dir }}/assets/themes/plymouth/{{ plymouth_theme_name }}.zip"
 
 gnome_enabled: true
 gnome_desktop_background_name: "BSonoma_Mac.png"
@@ -135,27 +133,15 @@ gnome_extensions:
   - name: gnome-shell-extension-windows-navigator
   - name: gnome-shell-extension-workspace-indicator
 
-keyd_config_src: "/home/{{ ansible_user }}/.dotfiles/.config/keyd/keyd.conf"
-keyd_config_dest: "/etc/keyd/default.conf"
-
-profile_picture_enabled: true
-picture_src: "{{ playbook_dir }}/assets/pictures/profile.jpg"
-
-plymouth_theme_name: debian-mac-style
-plymouth_theme_src: "{{ playbook_dir }}/assets/themes/plymouth/{{ plymouth_theme_name }}.zip"
-
 powershell_version: 7.6.0-preview.6
 ulauncher_gnome_integration: true
 dotnet_versions: 
   - 10.0
 
-tools:
-  spotify: true
-  docker: true
-  drawio: true
-  chrome: true
-  dotnet: true
-  vscode: true
-  powershell: true
-  obsidian: true
-  ulauncher: true
+post_install_reboot: false
+post_install_disable_services:
+  - cups
+  - cups-browsed
+
+post_install_remove_packages:
+  - firefox-esr

@@ -1,10 +1,17 @@
-tools:
-  spotify: false
-  docker: false
-  drawio: false
-  chrome: false
-  dotnet: false
-  vscode: false
-  powershell: false
-  obsidian: false
-  ulauncher: false
+tools_enabled: true
+tools_features:
+  devtools: true
+  media: true
+  productivity: true
+  virtualization: true
+
+tools_packages:
+  devtools:
+    - shellcheck
+
+  media: []
+  productivity: []
+
+  virtualization:
+    - virt-manager
+    - gnome-boxes

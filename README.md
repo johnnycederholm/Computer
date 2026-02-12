@@ -20,7 +20,7 @@ ansible-playbook \
     --ask-pass \
     --ask-become-pass \
     --limit <GROUP/HOST FILTER> \
-    playbooks/prepare-target-host.yml
+    prepare-target-host.yml
 ```
 
 ### Example
@@ -31,7 +31,7 @@ ansible-playbook \
     --ask-pass \
     --ask-become-pass \
     --limit vm \
-    playbooks/prepare-target-host.yml
+    prepare-target-host.yml
 ```
 
 ## Run playbook
@@ -43,7 +43,7 @@ ansible-playbook \
     --ask-become-pass \
     --limit <GROUP/HOST FILTER> \
     --extra-vars ansible_python_interpreter=/opt/ansible-venv/bin/python \
-    playbooks/bootstrap-machine.yml
+    bootstrap-machine.yml
 ```
 
 ### Example
@@ -55,5 +55,5 @@ ansible-playbook \
     --ask-become-pass \
     --limit vm \
     --extra-vars ansible_python_interpreter=/opt/ansible-venv/bin/python \
-    playbooks/bootstrap-machine.yml
+    bootstrap-machine.yml
 ```

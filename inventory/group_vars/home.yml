@@ -12,6 +12,8 @@ base_packages:
 
 base_dotfiles_repo: https://github.com/johnnycederholm/dotfiles.git
 base_dotfiles_dest: "/home/{{ ansible_user }}/.dotfiles"
+base_directories:
+  - Code
 
 base_nerd_fonts_directory: "/home/{{ ansible_user }}/.local/share/fonts"
 base_nerd_fonts:

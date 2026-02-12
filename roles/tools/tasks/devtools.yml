@@ -10,6 +10,12 @@
   ansible.builtin.include_role:
     name: vs-code
 
+- name: Install kubectl
+  ansible.builtin.include_tasks: kubectl.yml
+
+- name: Install helm
+  ansible.builtin.include_tasks: helm.yml
+
 - name: Install devtools packages
   ansible.builtin.apt:
     name: "{{ tools_packages.devtools }}"

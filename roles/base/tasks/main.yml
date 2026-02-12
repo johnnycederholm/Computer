@@ -30,6 +30,10 @@
   when:
     - base_packages | length > 0
 
+- name: Create directories
+  ansible.builtin.include_tasks: directories.yml
+  when: base_directories | length > 0
+
 - name: Install bootscreen
   ansible.builtin.import_role:
     name: plymouth
@@ -67,3 +71,8 @@
   ansible.builtin.import_tasks: profilepicture.yml
   become: true
   when: base_features.profile_picture | bool
+
+- name: Create SSH keys
+  ansible.builtin.import_tasks: sshkeys.yml
+  become: true
+  when: base_features.sshkeys | bool

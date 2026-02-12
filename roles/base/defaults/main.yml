@@ -1,4 +1,5 @@
 base_packages: []
+base_directories: []
 base_features:
   bootscreen: true
   firewall: true
@@ -7,3 +8,4 @@ base_features:
   ohmyposh: true
   powershell: true
   profile_picture: true
+  sshkeys: true

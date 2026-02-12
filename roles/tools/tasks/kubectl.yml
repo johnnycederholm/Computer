@@ -1,0 +1,27 @@
+- name: Install dependencies
+  ansible.builtin.apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+    state: present
+
+- name: Add public key
+  ansible.builtin.get_url:
+    url: https://pkgs.k8s.io/core:/stable:/v1.35/deb/Release.key
+    dest: /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+    mode: "644"
+
+- name: Add apt repository
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.35/deb/ /"
+    filename: kubernetes.list
+    state: present
+    update_cache: true
+
+- name: Install latest version
+  ansible.builtin.apt:
+    name:
+      - kubectl
+    state: present

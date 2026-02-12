@@ -1,0 +1,26 @@
+- name: Install dependencies
+  ansible.builtin.apt:
+    name:
+      - curl
+      - gpg
+      - apt-transport-https
+    state: present
+
+- name: Add public key
+  ansible.builtin.get_url:
+    url: https://packages.buildkite.com/helm-linux/helm-debian/gpgkey
+    dest: /usr/share/keyrings/helm.gpg
+    mode: "644"
+
+- name: Add apt repository
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/usr/share/keyrings/helm.gpg] https://packages.buildkite.com/helm-linux/helm-debian/any/ any main"
+    filename: helm-stable-debian.list
+    state: present
+    update_cache: true
+
+- name: Install latest version
+  ansible.builtin.apt:
+    name:
+      - helm
+    state: present

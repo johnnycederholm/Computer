@@ -81,3 +81,4 @@
   ansible.builtin.user:
     name: "{{ ansible_user }}"
     shell: /usr/bin/pwsh
+  become: true

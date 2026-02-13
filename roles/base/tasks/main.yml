@@ -76,3 +76,8 @@
   ansible.builtin.import_tasks: sshkeys.yml
   become: true
   when: base_features.sshkeys | bool
+
+- name: Change default shell
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    shell: /usr/bin/pwsh

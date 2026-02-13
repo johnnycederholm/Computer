@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo apt install -y git
+sudo apt install -y python3-venv
 
 ./create-environment.sh
 source .venv/bin/activate

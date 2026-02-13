@@ -63,6 +63,7 @@ gnome_configuration:
       - { name: /org/gnome/desktop/input-sources/sources, value: "[('xkb', 'us'), ('xkb', 'se')]" }
       - { name: /org/gnome/desktop/input-sources/per-window, value: true }
       - { name: /org/gnome/desktop/interface/icon-theme, value: "'ZorinBlue-Light'" }
+      - { name: /org/gnome/desktop/interface/cursor-theme, value: "'macOS'" }
       - { name: /org/gnome/shell/favorite-apps, value: ['org.gnome.Terminal.desktop', 'google-chrome.desktop', 'code.desktop', 'spotify.desktop', 'obsidian.desktop', 'drawio.desktop'] }
   
   - name: Gnome Terminal

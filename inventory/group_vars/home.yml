@@ -42,6 +42,7 @@ gnome_packages:
   - papers
   - gnome-shell-extensions
   - gnome-shell-extensions-extra
+  - tilix
 
 gnome_configuration:
   - name: Gnome
@@ -76,6 +77,29 @@ gnome_configuration:
       - { name: /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/use-theme-colors, value: false }
       - { name: /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/foreground-color, value: "'rgb(131,148,150)'" }
       - { name: /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/background-color, value: "'rgb(0,43,54)'" }
+
+  - name: Tilix
+    configuration:
+      - { name: /com/gexperts/Tilix/auto-hide-mouse, value: true }
+      - { name: /com/gexperts/Tilix/prompt-on-close, value: true }
+      - { name: /com/gexperts/Tilix/use-tabs, value: true }
+      - { name: /com/gexperts/Tilix/keybindings/session-switch-to-terminal-left, value: "'disabled'" }
+      - { name: /com/gexperts/Tilix/keybindings/win-switch-to-next-session, value: "'<Primary>Right'" }
+      - { name: /com/gexperts/Tilix/keybindings/win-switch-to-previous-session, value: "'<Primary>Left'" }
+      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/background-color, value: "'#300A24'" }
+      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/badge-color, value: "'#AC7EA8'" }
+      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/badge-color-set, value: false }
+      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/bold-color-set, value: false }
+      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/cursor-colors-set, value: false }
+      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/cursor-shape, value: "'underline'" }
+      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/font, value: "'JetBrainsMono Nerd Font 12'" }
+      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/foreground-color, value: "'#FFFFFF'" }
+      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/highlight-colors-set, value: false }
+      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/login-shell, value: true }
+      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/palette, value: ['#2E3436', '#CC0000', '#4E9A06', '#C4A000', '#3465A4', '#75507B', '#06989A', '#D3D7CF', '#555753', '#EF2929', '#8AE234', '#FCE94F', '#729FCF', '#AD7FA8', '#34E2E2', '#EEEEEC'] }
+      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/use-system-font, value: false }
+      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/use-theme-colors, value: false }
+      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/visible-name, value: "'Default'" }
 
 gnome_extensions:
   - id: dash-to-dock@micxgx.gmail.com

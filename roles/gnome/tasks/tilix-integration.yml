@@ -1,0 +1,39 @@
+- name: Read existing custom keybindings
+  community.general.dconf:
+    key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings
+    state: read
+  register: tilix_custom_keybindings
+  become: false
+
+- name: Parse list
+  set_fact:
+    current_list: "{{ tilix_custom_keybindings.value | from_yaml }}"
+
+- name: Merge Tilix keybinding
+  set_fact:
+    merged_list: "{{ ((current_list | default([], true)) + ['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/tilix/']) | unique }}"
+
+- name: Update custom keybindings
+  community.general.dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
+    value: "{{ merged_list | to_json }}"
+    state: present
+  become: false
+
+- name: "Create custom shortcut (name)"
+  community.general.dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/tilix/name"
+    value: "'Tilix'"
+  become: false
+
+- name: "Create custom shortcut (command)"
+  community.general.dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/tilix/command"
+    value: "'tilix --action app-new-session --focus-window'"
+  become: false
+
+- name: "Create custom shortcut (key binding)"
+  community.general.dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/tilix/binding"
+    value: "'<Super>x'"
+  become: false

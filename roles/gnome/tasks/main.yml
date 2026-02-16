@@ -26,3 +26,6 @@
     loop_var: extension
   when:
     - gnome_extensions | length > 0
+
+- name: Set Tilix keybinding
+  ansible.builtin.include_tasks: tilix-integration.yml

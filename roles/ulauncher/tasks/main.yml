@@ -12,7 +12,7 @@
     state: present
   become: true
 
-- name: Set desktop background
+- name: Set ulauncher keybinding
   ansible.builtin.include_tasks: gnome-integration.yml
   when:
     - ulauncher_gnome_integration | bool

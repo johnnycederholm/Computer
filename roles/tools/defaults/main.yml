@@ -14,3 +14,4 @@ tools_packages:
 
   virtualization:
     - virt-manager
+    - virtiofsd

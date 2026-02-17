@@ -29,3 +29,6 @@
 
 - name: Set Tilix keybinding
   ansible.builtin.include_tasks: tilix-integration.yml
+
+- name: Set Flameshot keybinding
+  ansible.builtin.include_tasks: flameshot-integration.yml

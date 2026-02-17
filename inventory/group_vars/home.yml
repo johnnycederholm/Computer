@@ -44,6 +44,7 @@ gnome_packages:
   - tilix
   - showtime
   - wl-clipboard
+  - flameshot
 
 gnome_configuration:
   - name: Gnome

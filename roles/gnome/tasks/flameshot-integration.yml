@@ -1,0 +1,39 @@
+- name: Read existing custom keybindings
+  community.general.dconf:
+    key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings
+    state: read
+  register: flameshot_custom_keybindings
+  become: false
+
+- name: Parse list
+  set_fact:
+    current_list: "{{ flameshot_custom_keybindings.value | from_yaml }}"
+
+- name: Merge Flameshot keybinding
+  set_fact:
+    merged_list: "{{ ((current_list | default([], true)) + ['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/flameshot/']) | unique }}"
+
+- name: Update custom keybindings
+  community.general.dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
+    value: "{{ merged_list | to_json }}"
+    state: present
+  become: false
+
+- name: "Create custom shortcut (name)"
+  community.general.dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/flameshot/name"
+    value: "'Take screenshot'"
+  become: false
+
+- name: "Create custom shortcut (command)"
+  community.general.dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/flameshot/command"
+    value: "'script --command \"flameshot gui\" /dev/null'"
+  become: false
+
+- name: "Create custom shortcut (key binding)"
+  community.general.dconf:
+    key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/flameshot/binding"
+    value: "'<Shift><Super>s'"
+  become: false

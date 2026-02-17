@@ -7,7 +7,6 @@ base_packages:
   - yq
   - curl
   - gpg
-  - meld
   - obfuscate
 
 base_dotfiles_repo: https://github.com/johnnycederholm/dotfiles.git
@@ -43,6 +42,8 @@ gnome_packages:
   - gnome-shell-extensions
   - gnome-shell-extensions-extra
   - tilix
+  - showtime
+  - wl-clipboard
 
 gnome_configuration:
   - name: Gnome

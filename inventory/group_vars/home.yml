@@ -45,6 +45,9 @@ gnome_packages:
   - showtime
   - wl-clipboard
   - flameshot
+  - gnome-keyring
+  - libsecret-1-0
+  - libsecret-tools
 
 gnome_configuration:
   - name: Gnome
@@ -52,69 +55,242 @@ gnome_configuration:
       - { name: /org/gnome/mutter/overlay-key, value: "''" }
       - { name: /org/gnome/mutter/dynamic-workspaces, value: false }
       - { name: /org/gnome/desktop/wm/preferences/num-workspaces, value: 4 }
-      - { name: /org/gnome/settings-daemon/plugins/media-keys/shutdown, value: ['<Control><Alt>Delete'] }
-      - { name: /org/gnome/settings-daemon/plugins/media-keys/logout, value: '@as []' }
-      - { name: /org/gnome/settings-daemon/plugins/media-keys/www, value: ['<Super>w'] }
-      - { name: /org/gnome/desktop/wm/keybindings/switch-windows, value: ['<Alt>Tab'] }
-      - { name: /org/gnome/desktop/wm/keybindings/switch-windows-backward, value: ['<Shift><Alt>Tab', '<Alt>Above_Tab'] }
-      - { name: /org/gnome/desktop/wm/keybindings/switch-applications, value: [''] }
-      - { name: /org/gnome/desktop/wm/keybindings/switch-applications-backward, value: [''] }
-      - { name: /org/gnome/settings-daemon/plugins/media-keys/home, value: ['<Super>e'] }
+      - {
+          name: /org/gnome/settings-daemon/plugins/media-keys/shutdown,
+          value: ["<Control><Alt>Delete"],
+        }
+      - {
+          name: /org/gnome/settings-daemon/plugins/media-keys/logout,
+          value: "@as []",
+        }
+      - {
+          name: /org/gnome/settings-daemon/plugins/media-keys/www,
+          value: ["<Super>w"],
+        }
+      - {
+          name: /org/gnome/desktop/wm/keybindings/switch-windows,
+          value: ["<Alt>Tab"],
+        }
+      - {
+          name: /org/gnome/desktop/wm/keybindings/switch-windows-backward,
+          value: ["<Shift><Alt>Tab", "<Alt>Above_Tab"],
+        }
+      - {
+          name: /org/gnome/desktop/wm/keybindings/switch-applications,
+          value: [""],
+        }
+      - {
+          name: /org/gnome/desktop/wm/keybindings/switch-applications-backward,
+          value: [""],
+        }
+      - {
+          name: /org/gnome/settings-daemon/plugins/media-keys/home,
+          value: ["<Super>e"],
+        }
       - { name: /org/gnome/desktop/interface/clock-format, value: "'24h'" }
       - { name: /org/gtk/settings/file-chooser/clock-format, value: "'24h'" }
       - { name: /org/gnome/desktop/interface/clock-show-date, value: false }
-      - { name: /org/gnome/desktop/input-sources/sources, value: "[('xkb', 'us'), ('xkb', 'se')]" }
+      - {
+          name: /org/gnome/desktop/input-sources/sources,
+          value: "[('xkb', 'us'), ('xkb', 'se')]",
+        }
       - { name: /org/gnome/desktop/input-sources/per-window, value: true }
-      - { name: /org/gnome/desktop/interface/icon-theme, value: "'ZorinBlue-Light'" }
+      - {
+          name: /org/gnome/desktop/interface/icon-theme,
+          value: "'ZorinBlue-Light'",
+        }
       - { name: /org/gnome/desktop/interface/cursor-theme, value: "'macOS'" }
-      - { name: /org/gnome/shell/favorite-apps, value: ['com.gexperts.Tilix.desktop', 'google-chrome.desktop', 'code.desktop', 'spotify.desktop', 'obsidian.desktop', 'drawio.desktop'] }
-  
+      - {
+          name: /org/gnome/shell/favorite-apps,
+          value:
+            [
+              "com.gexperts.Tilix.desktop",
+              "google-chrome.desktop",
+              "code.desktop",
+              "spotify.desktop",
+              "obsidian.desktop",
+              "drawio.desktop",
+            ],
+        }
+
   - name: Gnome Terminal
     configuration:
-      - { name: /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/cursor-shape, value: "'underline'" }
-      - { name: /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/visible-name, value: "'Default'" }
-      - { name: /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/use-system-font, value: false }
-      - { name: /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/font, value: "'JetBrainsMono Nerd Font Mono 12'" }
-      - { name: /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/palette, value: ['rgb(7,54,66)', 'rgb(220,50,47)', 'rgb(133,153,0)', 'rgb(181,137,0)', 'rgb(38,139,210)', 'rgb(211,54,130)', 'rgb(42,161,152)', 'rgb(238,232,213)', 'rgb(0,43,54)', 'rgb(203,75,22)', 'rgb(88,110,117)', 'rgb(101,123,131)', 'rgb(131,148,150)', 'rgb(108,113,196)', 'rgb(147,161,161)', 'rgb(253,246,227)'] }
-      - { name: /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/use-theme-colors, value: false }
-      - { name: /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/foreground-color, value: "'rgb(131,148,150)'" }
-      - { name: /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/background-color, value: "'rgb(0,43,54)'" }
+      - {
+          name: /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/cursor-shape,
+          value: "'underline'",
+        }
+      - {
+          name: /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/visible-name,
+          value: "'Default'",
+        }
+      - {
+          name: /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/use-system-font,
+          value: false,
+        }
+      - {
+          name: /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/font,
+          value: "'JetBrainsMono Nerd Font Mono 12'",
+        }
+      - {
+          name: /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/palette,
+          value:
+            [
+              "rgb(7,54,66)",
+              "rgb(220,50,47)",
+              "rgb(133,153,0)",
+              "rgb(181,137,0)",
+              "rgb(38,139,210)",
+              "rgb(211,54,130)",
+              "rgb(42,161,152)",
+              "rgb(238,232,213)",
+              "rgb(0,43,54)",
+              "rgb(203,75,22)",
+              "rgb(88,110,117)",
+              "rgb(101,123,131)",
+              "rgb(131,148,150)",
+              "rgb(108,113,196)",
+              "rgb(147,161,161)",
+              "rgb(253,246,227)",
+            ],
+        }
+      - {
+          name: /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/use-theme-colors,
+          value: false,
+        }
+      - {
+          name: /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/foreground-color,
+          value: "'rgb(131,148,150)'",
+        }
+      - {
+          name: /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/background-color,
+          value: "'rgb(0,43,54)'",
+        }
 
   - name: Tilix
     configuration:
       - { name: /com/gexperts/Tilix/auto-hide-mouse, value: true }
       - { name: /com/gexperts/Tilix/prompt-on-close, value: true }
       - { name: /com/gexperts/Tilix/use-tabs, value: true }
-      - { name: /com/gexperts/Tilix/terminal-title-style, value: "'none'"}
-      - { name: /com/gexperts/Tilix/keybindings/session-switch-to-terminal-left, value: "'disabled'" }
-      - { name: /com/gexperts/Tilix/keybindings/win-switch-to-next-session, value: "'<Primary>Right'" }
-      - { name: /com/gexperts/Tilix/keybindings/win-switch-to-previous-session, value: "'<Primary>Left'" }
-      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/background-color, value: "'#282828'" }
-      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/badge-color, value: "'#AC7EA8'" }
-      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/badge-color-set, value: false }
-      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/bold-color-set, value: false }
-      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/cursor-colors-set, value: false }
-      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/cursor-shape, value: "'underline'" }
-      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/font, value: "'JetBrainsMono Nerd Font 12'" }
-      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/foreground-color, value: "'#D4BE98'" }
-      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/highlight-colors-set, value: false }
-      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/login-shell, value: true }
-      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/palette, value: ['#3C3836', '#EA6962', '#A9B665', '#D8A657', '#7DAEA3', '#D3869B', '#89B482', '#D4BE98', '#3C3836', '#EA6962', '#A9B665', '#D8A657', '#7DAEA3', '#D3869B', '#89B482', '#D4BE98'] }
-      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/use-system-font, value: false }
-      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/use-theme-colors, value: false }
-      - { name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/visible-name, value: "'Default'" }
+      - { name: /com/gexperts/Tilix/terminal-title-style, value: "'none'" }
+      - {
+          name: /com/gexperts/Tilix/keybindings/session-switch-to-terminal-left,
+          value: "'disabled'",
+        }
+      - {
+          name: /com/gexperts/Tilix/keybindings/win-switch-to-next-session,
+          value: "'<Primary>Right'",
+        }
+      - {
+          name: /com/gexperts/Tilix/keybindings/win-switch-to-previous-session,
+          value: "'<Primary>Left'",
+        }
+      - {
+          name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/background-color,
+          value: "'#282828'",
+        }
+      - {
+          name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/badge-color,
+          value: "'#AC7EA8'",
+        }
+      - {
+          name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/badge-color-set,
+          value: false,
+        }
+      - {
+          name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/bold-color-set,
+          value: false,
+        }
+      - {
+          name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/cursor-colors-set,
+          value: false,
+        }
+      - {
+          name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/cursor-shape,
+          value: "'underline'",
+        }
+      - {
+          name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/font,
+          value: "'JetBrainsMono Nerd Font 12'",
+        }
+      - {
+          name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/foreground-color,
+          value: "'#D4BE98'",
+        }
+      - {
+          name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/highlight-colors-set,
+          value: false,
+        }
+      - {
+          name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/login-shell,
+          value: true,
+        }
+      - {
+          name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/palette,
+          value:
+            [
+              "#3C3836",
+              "#EA6962",
+              "#A9B665",
+              "#D8A657",
+              "#7DAEA3",
+              "#D3869B",
+              "#89B482",
+              "#D4BE98",
+              "#3C3836",
+              "#EA6962",
+              "#A9B665",
+              "#D8A657",
+              "#7DAEA3",
+              "#D3869B",
+              "#89B482",
+              "#D4BE98",
+            ],
+        }
+      - {
+          name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/use-system-font,
+          value: false,
+        }
+      - {
+          name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/use-theme-colors,
+          value: false,
+        }
+      - {
+          name: /com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d/visible-name,
+          value: "'Default'",
+        }
 
 gnome_extensions:
   - id: dash-to-dock@micxgx.gmail.com
     name: gnome-shell-extension-dashtodock
     configuration:
-      - { name: /org/gnome/shell/extensions/dash-to-dock/show-apps-at-top, value: true}
-      - { name: /org/gnome/shell/extensions/dash-to-dock/show-trash, value: false}
-      - { name: /org/gnome/shell/extensions/dash-to-dock/custom-theme-shrink, value: true }
-      - { name: /org/gnome/shell/extensions/dash-to-dock/transparency-mode, value: "'FIXED'" }
-      - { name: /org/gnome/shell/extensions/dash-to-dock/background-opacity, value: 0.0 }
-      - { name: /org/gnome/shell/extensions/dash-to-dock/running-indicator-style, value: "'DASHES'" }
-      - { name: /org/gnome/shell/extensions/dash-to-dock/intellihide, value: false }
+      - {
+          name: /org/gnome/shell/extensions/dash-to-dock/show-apps-at-top,
+          value: true,
+        }
+      - {
+          name: /org/gnome/shell/extensions/dash-to-dock/show-trash,
+          value: false,
+        }
+      - {
+          name: /org/gnome/shell/extensions/dash-to-dock/custom-theme-shrink,
+          value: true,
+        }
+      - {
+          name: /org/gnome/shell/extensions/dash-to-dock/transparency-mode,
+          value: "'FIXED'",
+        }
+      - {
+          name: /org/gnome/shell/extensions/dash-to-dock/background-opacity,
+          value: 0.0,
+        }
+      - {
+          name: /org/gnome/shell/extensions/dash-to-dock/running-indicator-style,
+          value: "'DASHES'",
+        }
+      - {
+          name: /org/gnome/shell/extensions/dash-to-dock/intellihide,
+          value: false,
+        }
 
   - id: blur-my-shell@aunetx
     name: gnome-shell-extension-blur-my-shell
@@ -131,20 +307,53 @@ gnome_extensions:
 
   - id: just-perfection-desktop@just-perfection
     configuration:
-      - { name: /org/gnome/shell/extensions/just-perfection/support-notifier-type, value: 0 }
-      - { name: /org/gnome/shell/extensions/just-perfection/workspace-popup, value: false }
-      - { name: /org/gnome/shell/extensions/just-perfection/quick-settings-dark-mode, value: false }
-      - { name: /org/gnome/shell/extensions/just-perfection/quick-settings-night-light, value: false }
-      - { name: /org/gnome/shell/extensions/just-perfection/world-clock, value: false }
-      - { name: /org/gnome/shell/extensions/just-perfection/weather, value: false }
+      - {
+          name: /org/gnome/shell/extensions/just-perfection/support-notifier-type,
+          value: 0,
+        }
+      - {
+          name: /org/gnome/shell/extensions/just-perfection/workspace-popup,
+          value: false,
+        }
+      - {
+          name: /org/gnome/shell/extensions/just-perfection/quick-settings-dark-mode,
+          value: false,
+        }
+      - {
+          name: /org/gnome/shell/extensions/just-perfection/quick-settings-night-light,
+          value: false,
+        }
+      - {
+          name: /org/gnome/shell/extensions/just-perfection/world-clock,
+          value: false,
+        }
+      - {
+          name: /org/gnome/shell/extensions/just-perfection/weather,
+          value: false,
+        }
 
   - id: system-monitor@gnome-shell-extensions.gcampax.github.com
     configuration:
-      - { name: /org/gnome/shell/extensions/system-monitor/show-cpu, value: true }
-      - { name: /org/gnome/shell/extensions/system-monitor/show-memory, value: true }
-      - { name: /org/gnome/shell/extensions/system-monitor/show-swap, value: false }
-      - { name: /org/gnome/shell/extensions/system-monitor/show-upload, value: false }
-      - { name: /org/gnome/shell/extensions/system-monitor/show-download, value: false }
+      - {
+          name: /org/gnome/shell/extensions/system-monitor/show-cpu,
+          value: true,
+        }
+      - {
+          name: /org/gnome/shell/extensions/system-monitor/show-memory,
+          value: true,
+        }
+      - {
+          name: /org/gnome/shell/extensions/system-monitor/show-swap,
+          value: false,
+        }
+      - {
+          name: /org/gnome/shell/extensions/system-monitor/show-upload,
+          value: false,
+        }
+      - {
+          name: /org/gnome/shell/extensions/system-monitor/show-download,
+          value: false,
+        }
 
   - id: ubuntu-appindicators@ubuntu.com
     name: gnome-shell-extension-appindicator
@@ -154,7 +363,7 @@ gnome_extensions:
 
   - id: GPaste@gnome-shell-extensions.gnome.org
     name: gnome-shell-extension-gpaste
-  
+
   - name: gnome-shell-extension-auto-move-windows
   - name: gnome-shell-extension-drive-menu
   - name: gnome-shell-extension-launch-new-instance
@@ -165,7 +374,7 @@ gnome_extensions:
 
 powershell_version: 7.6.0-preview.6
 ulauncher_gnome_integration: true
-dotnet_versions: 
+dotnet_versions:
   - 10.0
 
 post_install_reboot: false
